@@ -1,14 +1,14 @@
-package com.example.crosshelper.ui.notifications;
+package com.example.crosshelper.ui.pixeling;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class NotificationsViewModel extends ViewModel {
+public class PixelingViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public NotificationsViewModel() {
+    public PixelingViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is notifications fragment");
     }

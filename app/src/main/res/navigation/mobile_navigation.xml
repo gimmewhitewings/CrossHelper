@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.crosshelper.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:name="com.example.crosshelper.ui.dashboard.FavoritesFragment"
+        android:label="@string/title_favorites"
+        tools:layout="@layout/fragment_favorites" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.crosshelper.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:name="com.example.crosshelper.ui.pixeling.PixelingFragment"
+        android:label="@string/title_pixeling"
+        tools:layout="@layout/fragment_pixeling" />
 </navigation>
