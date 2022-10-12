@@ -1,4 +1,4 @@
-package com.example.crosshelper.ui.dashboard;
+package com.example.crosshelper.ui.favorites;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

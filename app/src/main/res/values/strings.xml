@@ -3,4 +3,6 @@
     <string name="title_home">Главная</string>
     <string name="title_favorites">Избранное</string>
     <string name="title_pixeling">Пикселизация</string>
+    <string name="size_text">Размер: </string>
+    <string name="colors_text">Цвета: </string>
 </resources>
