@@ -1,5 +1,6 @@
 package com.example.crosshelper.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,19 +16,29 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.crosshelper.CardsRecyclerAdapter;
 import com.example.crosshelper.R;
 import com.example.crosshelper.SchemeUnit;
+import com.example.crosshelper.editor.EditorActivity;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements CardsRecyclerAdapter.OnCardListener {
 
     private ArrayList<SchemeUnit> schemes;
 
     private void initializeData() {
         schemes = new ArrayList<SchemeUnit>();
+        schemes.add(new SchemeUnit(R.drawable.two_minions, 200, 100, 50));
         schemes.add(new SchemeUnit(R.drawable.minion, 50, 100, 5));
         schemes.add(new SchemeUnit(R.drawable.another_minion, 100, 45, 6));
+        schemes.add(new SchemeUnit(R.drawable.bob_minion_pixel_art, 30, 30, 5));
+        schemes.add(new SchemeUnit(R.drawable.bob_minion_pixel_art, 30, 30, 5));
+        schemes.add(new SchemeUnit(R.drawable.bob_minion_pixel_art, 30, 30, 5));
+        schemes.add(new SchemeUnit(R.drawable.bob_minion_pixel_art, 30, 30, 5));
+        schemes.add(new SchemeUnit(R.drawable.bob_minion_pixel_art, 30, 30, 5));
+        schemes.add(new SchemeUnit(R.drawable.bob_minion_pixel_art, 30, 30, 5));
+        schemes.add(new SchemeUnit(R.drawable.bob_minion_pixel_art, 30, 30, 5));
+        schemes.add(new SchemeUnit(R.drawable.bob_minion_pixel_art, 30, 30, 5));
         schemes.add(new SchemeUnit(R.drawable.bob_minion_pixel_art, 30, 30, 5));
     }
 
@@ -38,7 +49,7 @@ public class HomeFragment extends Fragment {
         initializeData();
         RecyclerView recyclerview = view.findViewById(R.id.cardsRecyclerView);
         recyclerview.setLayoutManager(new GridLayoutManager(view.getContext(), 2));
-        CardsRecyclerAdapter cardsRecyclerAdapter = new CardsRecyclerAdapter(schemes);
+        CardsRecyclerAdapter cardsRecyclerAdapter = new CardsRecyclerAdapter(schemes, this);
         recyclerview.setAdapter(cardsRecyclerAdapter);
         return view;
     }
@@ -56,5 +67,12 @@ public class HomeFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+    }
+
+    @Override
+    public void onCardClick(int position) {
+        Intent intent = new Intent(this.getContext(), EditorActivity.class);
+        intent.putExtra("scheme_object", schemes.get(position));
+        startActivity(intent);
     }
 }
