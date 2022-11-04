@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardView"
-    android:layout_width="140dp"
-    android:layout_height="160dp"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="20dp"
-    app:cardElevation="1dp">
+    android:layout_width="160dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="@dimen/cardview_default_elevation">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,10 +15,10 @@
 
         <ImageView
             android:id="@+id/cardImage"
-            android:layout_width="101dp"
+            android:layout_width="0dp"
             android:layout_height="101dp"
-            android:layout_marginTop="8dp"
             android:importantForAccessibility="no"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -29,7 +29,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="5dp"
             android:layout_marginBottom="32dp"
             android:text="@string/size_text"
             android:textSize="14sp"
@@ -41,10 +40,7 @@
             android:id="@+id/colorsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
             android:text="@string/colors_text"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/sizeText"
             app:layout_constraintTop_toBottomOf="@+id/sizeText" />
 
@@ -52,7 +48,7 @@
             android:id="@+id/sizeValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             app:layout_constraintBottom_toBottomOf="@+id/sizeText"
             app:layout_constraintStart_toEndOf="@+id/sizeText"
             app:layout_constraintTop_toTopOf="@+id/sizeText"
@@ -62,11 +58,24 @@
             android:id="@+id/colorsValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             app:layout_constraintBottom_toBottomOf="@+id/colorsText"
             app:layout_constraintStart_toEndOf="@+id/colorsText"
             app:layout_constraintTop_toTopOf="@+id/colorsText"
             tools:text="18" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            app:layout_constraintBottom_toBottomOf="@id/colorsText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/colorsText"
+            app:srcCompat="@drawable/ic_baseline_favorite_border_24"
+            app:tint="@color/secondaryLightColor" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
