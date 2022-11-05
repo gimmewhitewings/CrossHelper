@@ -3,6 +3,7 @@ package com.example.crosshelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 public class CardsRecyclerAdapter extends RecyclerView.Adapter<CardsRecyclerAdapter.CardsViewHolder> {
 
     ArrayList<SchemeUnit> schemes;
-    private OnCardListener onCardListener;
+    private final OnCardListener onCardListener;
 
 
     public CardsRecyclerAdapter(ArrayList<SchemeUnit> schemes, OnCardListener onCardListener) {
@@ -30,6 +31,7 @@ public class CardsRecyclerAdapter extends RecyclerView.Adapter<CardsRecyclerAdap
         public TextView colorsText;
         public TextView colorsValue;
         public ImageView imageId;
+        public ImageButton favoriteButton;
 
         OnCardListener onCardListener;
 
@@ -41,6 +43,27 @@ public class CardsRecyclerAdapter extends RecyclerView.Adapter<CardsRecyclerAdap
             sizeValue = itemView.findViewById(R.id.sizeValue);
             colorsText = itemView.findViewById(R.id.colorsText);
             colorsValue = itemView.findViewById(R.id.colorsValue);
+            favoriteButton = itemView.findViewById(R.id.favoriteButton);
+            // add to favorite button
+            favoriteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (favoriteButton.getTag().equals("favorite")) {
+                        favoriteButton.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+                        favoriteButton.setTag("not_favorite");
+                    } else {
+                        favoriteButton.setImageResource(R.drawable.ic_baseline_favorite_24);
+                        favoriteButton.setTag("favorite");
+                    }
+
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        SchemeUnit scheme = schemes.get(position);
+                        scheme.setFavorite(!scheme.isFavorite());
+                    }
+                }
+            });
+
             this.onCardListener = onCardListener;
 
             itemView.setOnClickListener(this);

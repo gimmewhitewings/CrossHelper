@@ -112,8 +112,8 @@ public class ImageViewController {
         int touchY = (int) event.getY();
 
         // Zoom does not affect on image view size
-        int imageX = (int)((touchX - posXY[0]) / factor);
-        int imageY = (int)((touchY - posXY[1]) / factor);
+        int imageX = (int) ((touchX - posXY[0]) / factor);
+        int imageY = (int) ((touchY - posXY[1]) / factor);
 
         activatePixel(imageView, imageX, imageY, currentAlpha);
         if (!actionsStack.isStartPosition())

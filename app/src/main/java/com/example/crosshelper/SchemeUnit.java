@@ -12,6 +12,7 @@ public class SchemeUnit implements Parcelable {
     String size;
     String colors;
     int colorsAmount;
+    boolean isFavorite;
 
     public SchemeUnit(int imageId, int width, int height, int colorsAmount) {
         this.imageId = imageId;
@@ -20,6 +21,7 @@ public class SchemeUnit implements Parcelable {
         this.size = width + "x" + height;
         this.colors = String.valueOf(colorsAmount);
         this.colorsAmount = colorsAmount;
+        this.isFavorite = false;
     }
 
     public int getImageId() {
@@ -62,4 +64,33 @@ public class SchemeUnit implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(imageId);
     }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
+    }
+
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public int getColorsAmount() {
+        return colorsAmount;
+    }
+
+    public void setColorsAmount(int colorsAmount) {
+        this.colorsAmount = colorsAmount;
+    }
+
 }

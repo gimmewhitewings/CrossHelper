@@ -22,8 +22,7 @@ public class ActionsStack {
     public ImageAction reversePeekWithPosition() {
         if (currentIndex + 1 >= stack.size() || currentIndex + 1 < 0) {
             return null;
-        }
-        else {
+        } else {
             currentIndex++;
             return stack.get(currentIndex);
         }
@@ -43,8 +42,7 @@ public class ActionsStack {
 
         if (stack.size() >= fixedSize) {
             stack.removeElementAt(0);
-        }
-        else
+        } else
             currentIndex++;
         stack.push(imageAction);
     }
