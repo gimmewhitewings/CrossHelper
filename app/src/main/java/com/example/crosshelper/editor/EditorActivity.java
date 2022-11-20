@@ -6,19 +6,24 @@ import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.crosshelper.MainActivity;
 import com.example.crosshelper.R;
 import com.example.crosshelper.SchemeUnit;
+import com.example.crosshelper.editor.recyclerview.CustomRecyclerAdapter;
+import com.example.crosshelper.editor.recyclerview.RecyclerListener;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 
-public class EditorActivity extends AppCompatActivity {
+public class EditorActivity extends AppCompatActivity implements RecyclerListener {
     ImageViewController imageViewController;
 
     @SuppressLint("ClickableViewAccessibility")
@@ -29,6 +34,7 @@ public class EditorActivity extends AppCompatActivity {
 
         SchemeUnit schemeUnit = getIntent().getParcelableExtra("scheme_object");
 
+        // Loading images directly and from processing
         imageViewController = new ImageViewController(
                 this,
                 new WeakReference<>(findViewById(R.id.imageView)),
@@ -58,18 +64,38 @@ public class EditorActivity extends AppCompatActivity {
         );
 
         Button closeButton = findViewById(R.id.closeButton);
-        closeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(EditorActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
+        closeButton.setOnClickListener(view -> {
+            Intent intent = new Intent(EditorActivity.this, MainActivity.class);
+            startActivity(intent);
         });
+
+        // Prepare list of colors
+        ArrayList<Integer> colors = new ArrayList<>(imageViewController.getAllColors());
+
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(
+                new GridLayoutManager(
+                        this,
+                        2,
+                        GridLayoutManager.HORIZONTAL,
+                        false
+                )
+        );
+        recyclerView.setAdapter(new CustomRecyclerAdapter(this, colors));
+
+        // To automatically adjust when scrolling through a list
+        LinearSnapHelper pagerSnapHelper = new LinearSnapHelper();
+        pagerSnapHelper.attachToRecyclerView(recyclerView);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         imageViewController.onTouchEvent(event);
         return super.onTouchEvent(event);
+    }
+
+    @Override
+    public void onElementClick(int color) {
+        imageViewController.highLightAllPixelsWithColor(color);
     }
 }
