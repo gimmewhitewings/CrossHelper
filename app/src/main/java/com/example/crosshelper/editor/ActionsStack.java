@@ -22,7 +22,8 @@ public class ActionsStack {
     public ImageAction reversePeekWithPosition() {
         if (currentIndex + 1 >= stack.size() || currentIndex + 1 < 0) {
             return null;
-        } else {
+        }
+        else {
             currentIndex++;
             return stack.get(currentIndex);
         }
@@ -33,16 +34,13 @@ public class ActionsStack {
     }
 
     public void push(ImageAction imageAction) {
-        long count = stack.stream().filter(item ->
-                (item.x == imageAction.x && item.y == imageAction.y &&
-                        item.isActivated == imageAction.isActivated)
-        ).count();
-        if (count != 0)
+        if (isActionInStack(imageAction))
             return;
 
         if (stack.size() >= fixedSize) {
             stack.removeElementAt(0);
-        } else
+        }
+        else
             currentIndex++;
         stack.push(imageAction);
     }
@@ -50,5 +48,21 @@ public class ActionsStack {
     public void clear() {
         currentIndex = -1;
         stack.clear();
+    }
+
+    @SuppressWarnings("unchecked")
+    private boolean isActionInStack(ImageAction imageAction) {
+        Stack<ImageAction> copy = (Stack<ImageAction>) stack.clone();
+
+        for (int i = 0; i < stack.size(); i++) {
+            ImageAction currentImageAction = copy.pop();
+            if (
+                    currentImageAction.x == imageAction.x &&
+                    currentImageAction.y == imageAction.y &&
+                    currentImageAction.isActivated == imageAction.isActivated
+            )
+                return true;
+        }
+        return false;
     }
 }
