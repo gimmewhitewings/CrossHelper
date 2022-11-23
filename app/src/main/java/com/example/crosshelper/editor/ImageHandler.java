@@ -77,8 +77,7 @@ public class ImageHandler {
         setActivatedPixels();
     }
 
-    public void printMark(int x, int y)
-    {
+    public void printMark(int x, int y) {
         // cross
         float[] lines = new float[8];
 
@@ -159,8 +158,7 @@ public class ImageHandler {
                 getColorWithoutAlpha(highlightedColor) == getColorWithoutAlpha(color)) {
             // If there is a color highlight, then do not erase it
             color = getColor(highlightedColor, false);
-        }
-        else {
+        } else {
             color = getColor(color, !isActivated);
         }
         paint.setColor(color);
@@ -182,14 +180,13 @@ public class ImageHandler {
         return true;
     }
 
-    public boolean[] getActivatedPixels()
-    {
+    public boolean[] getActivatedPixels() {
         return activatedPixels.clone();
     }
 
     @SuppressWarnings("unchecked")
     public HashSet<Integer> getColors() {
-        return (HashSet<Integer>)colors.clone();
+        return (HashSet<Integer>) colors.clone();
     }
 
     public Bitmap getPixelatedBitmap() {
@@ -216,8 +213,7 @@ public class ImageHandler {
         return pixelsInBigSide;
     }
 
-    protected void prepareCanvas()
-    {
+    protected void prepareCanvas() {
         paint = new Paint();
         paint.setAntiAlias(false);
         paint.setFilterBitmap(false);
@@ -225,8 +221,7 @@ public class ImageHandler {
         paint.setStrokeWidth(gridWidth);
     }
 
-    protected void setActivatedPixels()
-    {
+    protected void setActivatedPixels() {
         for (int i = 0; i < activatedPixels.length; i++) {
             // i % pixelatedBitmap.getWidth() - x
             // i / pixelatedBitmap.getWidth() - y
@@ -272,8 +267,8 @@ public class ImageHandler {
     // Returns a small pixelated bitmap
     protected Bitmap getPixelatedBitmap(Bitmap bitmap) {
         int initialBigSideSize = Math.max(bitmap.getHeight(), bitmap.getWidth());
-        float ratio = (float)pixelsInBigSide / (float)initialBigSideSize;
-        int initialPixelSideSize = (int)(1.0F / ratio);
+        float ratio = (float) pixelsInBigSide / (float) initialBigSideSize;
+        int initialPixelSideSize = (int) (1.0F / ratio);
         Point newSize = new Point(
                 (int) (bitmap.getWidth() * ratio),
                 (int) (bitmap.getHeight() * ratio)
@@ -285,11 +280,9 @@ public class ImageHandler {
                 Bitmap.Config.ARGB_8888
         );
 
-        int halfOfInitialPixelSide = (int)(initialPixelSideSize * 0.5F);
-        for (int y = 0; y < newSize.y; y++)
-        {
-            for (int x = 0; x < newSize.x; x++)
-            {
+        int halfOfInitialPixelSide = (int) (initialPixelSideSize * 0.5F);
+        for (int y = 0; y < newSize.y; y++) {
+            for (int x = 0; x < newSize.x; x++) {
                 // x * initialPixelSideSize - LeftUp corner X
                 // y * initialPixelSideSize - LeftUp corner Y
                 int color = bitmap.getPixel(
@@ -309,8 +302,8 @@ public class ImageHandler {
     protected Bitmap getExpandedBitmap(Bitmap bitmap) {
         int initialBigSideSize = Math.max(bitmap.getHeight(), bitmap.getWidth());
 
-        float ratio = (float)bigSideSize / (float)initialBigSideSize;
-        newPixelSideSize = (int)ratio;
+        float ratio = (float) bigSideSize / (float) initialBigSideSize;
+        newPixelSideSize = (int) ratio;
         Point newSize = getBitmapSize(bitmap.getWidth(), bitmap.getHeight());
 
         Bitmap resultBitmap = Bitmap.createBitmap(
@@ -332,8 +325,7 @@ public class ImageHandler {
 
         // Vertical lines
         int positionIndex = 1;
-        for (int i = 0; i < bitmap.getWidth() * 4; i += 4)
-        {
+        for (int i = 0; i < bitmap.getWidth() * 4; i += 4) {
             lines[i] = positionIndex * newPixelSideSize + gridWidth * 0.5F; // start x
             lines[i + 1] = 0; // start y
             lines[i + 2] = positionIndex * newPixelSideSize + gridWidth * 0.5F; // end x
@@ -343,8 +335,7 @@ public class ImageHandler {
 
         // Horizontal lines
         positionIndex = 1;
-        for (int i = bitmap.getWidth() * 4; i < lines.length; i += 4)
-        {
+        for (int i = bitmap.getWidth() * 4; i < lines.length; i += 4) {
             lines[i] = 0; // start x
             lines[i + 1] = positionIndex * newPixelSideSize + gridWidth * 0.5F; // start y
             lines[i + 2] = newSize.x - 1; // end x

@@ -26,6 +26,13 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".ui.pixeling.PixelingSettingActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name="com.example.crosshelper.editor.EditorActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"

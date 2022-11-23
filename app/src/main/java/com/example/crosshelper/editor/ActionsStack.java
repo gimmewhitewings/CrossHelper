@@ -22,8 +22,7 @@ public class ActionsStack {
     public ImageAction reversePeekWithPosition() {
         if (currentIndex + 1 >= stack.size() || currentIndex + 1 < 0) {
             return null;
-        }
-        else {
+        } else {
             currentIndex++;
             return stack.get(currentIndex);
         }
@@ -39,8 +38,7 @@ public class ActionsStack {
 
         if (stack.size() >= fixedSize) {
             stack.removeElementAt(0);
-        }
-        else
+        } else
             currentIndex++;
         stack.push(imageAction);
     }
@@ -58,8 +56,8 @@ public class ActionsStack {
             ImageAction currentImageAction = copy.pop();
             if (
                     currentImageAction.x == imageAction.x &&
-                    currentImageAction.y == imageAction.y &&
-                    currentImageAction.isActivated == imageAction.isActivated
+                            currentImageAction.y == imageAction.y &&
+                            currentImageAction.isActivated == imageAction.isActivated
             )
                 return true;
         }

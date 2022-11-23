@@ -5,4 +5,6 @@
     <string name="title_pixeling">Пикселизация</string>
     <string name="size_text">Размер: </string>
     <string name="colors_text">Цвета: </string>
+    <string name="add_scheme">Добавить схему</string>
+    <string name="accept_pixeling">Принять</string>
 </resources>

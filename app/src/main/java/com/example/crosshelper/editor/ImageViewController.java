@@ -123,12 +123,12 @@ public class ImageViewController {
         if (imageHandler.getBitmapWidth() > imageHandler.getBitmapHeight()) {
             sizeOfDisplayBitmap = new PointF(
                     screenSize.x,
-                    screenSize.x * ((float)imageHandler.getBitmapHeight() /
+                    screenSize.x * ((float) imageHandler.getBitmapHeight() /
                             imageHandler.getBitmapWidth())
             );
         } else {
             sizeOfDisplayBitmap = new PointF(
-                    screenSize.y * ((float)imageHandler.getBitmapWidth() /
+                    screenSize.y * ((float) imageHandler.getBitmapWidth() /
                             imageHandler.getBitmapHeight()),
                     screenSize.y
             );
@@ -166,9 +166,9 @@ public class ImageViewController {
             matrixOffset = calculateMatrixOffset(imageView);
             //viewRatio = (float)imageHandler.getBitmapWidth() / imageView.getWidth();
             if (displaySidesRatio > 1.0F)
-                viewToBitmapRatio = (float)imageHandler.getBitmapWidth() / imageView.getWidth();
+                viewToBitmapRatio = (float) imageHandler.getBitmapWidth() / imageView.getWidth();
             else
-                viewToBitmapRatio = (float)imageHandler.getBitmapHeight() / imageView.getHeight();
+                viewToBitmapRatio = (float) imageHandler.getBitmapHeight() / imageView.getHeight();
         }
 
         // scroll
@@ -251,13 +251,11 @@ public class ImageViewController {
         return imageHandler.getColors();
     }
 
-    public Bitmap getPixelatedBitmap()
-    {
+    public Bitmap getPixelatedBitmap() {
         return imageHandler.getPixelatedBitmap();
     }
 
-    public boolean[] getActivatedPixels()
-    {
+    public boolean[] getActivatedPixels() {
         return imageHandler.getActivatedPixels();
     }
 
@@ -265,8 +263,7 @@ public class ImageViewController {
         this.isActivating = isActivating;
     }
 
-    protected void OnScaleListener(ScaleGestureDetector detector)
-    {
+    protected void OnScaleListener(ScaleGestureDetector detector) {
         ImageView imageView = imageViewReference.get();
 
         if (detector.getTimeDelta() == 0) {
@@ -341,8 +338,7 @@ public class ImageViewController {
         return imageHandler.setPixel(x, y, isActivated);
     }
 
-    protected PointF calculateMatrixOffset(ImageView imageView)
-    {
+    protected PointF calculateMatrixOffset(ImageView imageView) {
         float[] values = new float[9];
         imageView.getImageMatrix().getValues(values);
 
@@ -352,11 +348,10 @@ public class ImageViewController {
         );
     }
 
-    protected void calculateScaleBorders(int pixelsInBigSide)
-    {
+    protected void calculateScaleBorders(int pixelsInBigSide) {
         // If the bitmap goes beyond the image view, then we adjust by this ratio
         if (screenSize.x < imageHandler.getBitmapWidth())
-            sizeRatio = 40.0F / (float)pixelsInBigSide;
+            sizeRatio = 40.0F / (float) pixelsInBigSide;
 
         scaleBorder.set(
                 scaleBorder.x * scaleRatio * sizeRatio,
@@ -364,9 +359,8 @@ public class ImageViewController {
         );
     }
 
-    protected void calculateSizeOfBitmapOnView()
-    {
-        displaySidesRatio = (float)imageHandler.getBitmapWidth() /
+    protected void calculateSizeOfBitmapOnView() {
+        displaySidesRatio = (float) imageHandler.getBitmapWidth() /
                 imageHandler.getBitmapHeight();
         if (displaySidesRatio > 1.0F)
             sizeOfDisplayBitmap = new PointF(screenSize.x, screenSize.x / displaySidesRatio);
@@ -374,8 +368,7 @@ public class ImageViewController {
             sizeOfDisplayBitmap = new PointF(screenSize.y * displaySidesRatio, screenSize.y);
     }
 
-    protected Point getCoordinatesOfClick(ImageView imageView, MotionEvent event)
-    {
+    protected Point getCoordinatesOfClick(ImageView imageView, MotionEvent event) {
         int[] posXY = new int[2]; // top left corner
         imageView.getLocationInWindow(posXY);
 
@@ -394,6 +387,6 @@ public class ImageViewController {
             imageY *= viewToBitmapRatio;
         }
 
-        return new Point((int)imageX, (int)imageY);
+        return new Point((int) imageX, (int) imageY);
     }
 }
