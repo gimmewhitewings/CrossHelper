@@ -154,6 +154,14 @@ public class ImageViewController {
         actionsStack = new ActionsStack(STACK_SIZE);
     }
 
+    public void resizeImage(Bitmap bitmap, int bigSideSize) {
+        ImageView imageView = imageViewReference.get();
+        if (imageView == null)
+            return;
+        imageHandler.resizeImage(bitmap, bigSideSize);
+        imageHandler.setBitmapToImageView(imageView);
+    }
+
     public void onTouchEvent(MotionEvent event) {
         ImageView imageView = imageViewReference.get();
         if (imageView == null)
@@ -164,7 +172,6 @@ public class ImageViewController {
         if (initialPosition == null) {
             initialPosition = new PointF(imageView.getX(), imageView.getY());
             matrixOffset = calculateMatrixOffset(imageView);
-            //viewRatio = (float)imageHandler.getBitmapWidth() / imageView.getWidth();
             if (displaySidesRatio > 1.0F)
                 viewToBitmapRatio = (float) imageHandler.getBitmapWidth() / imageView.getWidth();
             else
