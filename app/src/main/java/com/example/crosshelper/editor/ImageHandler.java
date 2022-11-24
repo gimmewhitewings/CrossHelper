@@ -45,7 +45,7 @@ public class ImageHandler {
 
         prepareCanvas();
         colors = new HashSet<>();
-        pixelatedBitmap = getPixelatedBitmap(bitmap);
+        pixelatedBitmap = getPixelatedBitmap(bitmap, pixelsInBigSide);
         activatedPixels = new boolean[pixelatedBitmap.getWidth() *
                 pixelatedBitmap.getHeight()];
         this.bitmap = getExpandedBitmap(pixelatedBitmap);
@@ -213,6 +213,11 @@ public class ImageHandler {
         return pixelsInBigSide;
     }
 
+    public void resizeImage(Bitmap bitmap, int pixelsInBigSide) {
+        pixelatedBitmap = getPixelatedBitmap(bitmap, pixelsInBigSide);
+        this.bitmap = getExpandedBitmap(pixelatedBitmap);
+    }
+
     protected void prepareCanvas() {
         paint = new Paint();
         paint.setAntiAlias(false);
@@ -265,7 +270,7 @@ public class ImageHandler {
     }
 
     // Returns a small pixelated bitmap
-    protected Bitmap getPixelatedBitmap(Bitmap bitmap) {
+    protected Bitmap getPixelatedBitmap(Bitmap bitmap, int pixelsInBigSide) {
         int initialBigSideSize = Math.max(bitmap.getHeight(), bitmap.getWidth());
         float ratio = (float) pixelsInBigSide / (float) initialBigSideSize;
         int initialPixelSideSize = (int) (1.0F / ratio);
